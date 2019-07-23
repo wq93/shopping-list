@@ -29,7 +29,10 @@ thead th {
   padding: 22px 0 !important;
   text-align: center;
 }
-.table-header .checkbox-thead {
+.table-header .checkbox-th {
+  width: 70px;
+}
+.table-header .checkbox-th .checkbox-all {
   margin: 0 48px 0 8px !important;
 }
 
@@ -38,7 +41,7 @@ thead th {
   margin-left: 62px;
 }
 .first-floor td {
-  padding: 16px 0 16px 16px !important;
+  padding: 16px 0 16px 8px !important;
   border-bottom: 0 !important;
   background: rgba(201, 201, 201, 1);
 }
@@ -53,6 +56,14 @@ thead th {
   cursor: pointer;
   padding: 8px;
 }
+.second-floor .toggle-view-icon:before {
+  content:"➕";
+}
+
+.second-floor .toggle-view-icon.active:before {
+  content:"➖";
+}
+
 /*第三层*/
 .third-floor .td-product {
   display: flex;
