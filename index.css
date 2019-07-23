@@ -1,0 +1,82 @@
+/* 公用 */
+.target-btn {
+  color: #3399FF;
+  cursor: pointer;
+}
+.color-FF6600 {
+  color: #FF6600;
+}
+.color-339900 {
+  color: #339900;
+}
+.color-3399FF {
+  color: #3399FF;
+}
+.c-pointer {
+  cursor: pointer;
+}
+table {
+  font-size: 12px;
+}
+thead th {
+  background: #f2f2f2;
+}
+.v-align-m {
+  vertical-align: middle !important;
+}
+/* 表格头部 */
+.table-header th {
+  padding: 22px 0 !important;
+  text-align: center;
+}
+.table-header .checkbox-thead {
+  margin: 0 48px 0 8px !important;
+}
+
+/*第一层*/
+.first-floor .spu-text {
+  margin-left: 62px;
+}
+.first-floor td {
+  padding: 16px 0 16px 16px !important;
+  border-bottom: 0 !important;
+  background: rgba(201, 201, 201, 1);
+}
+/*第二层*/
+.second-floor td {
+  padding: 16px 0 !important;
+  border-top: 0 !important;
+  background: rgba(201, 201, 201, 1);
+}
+.second-floor .toggle-view-icon {
+  margin: 0 16px 0 32px;
+  cursor: pointer;
+  padding: 8px;
+}
+/*第三层*/
+.third-floor .td-product {
+  display: flex;
+  border: none;
+}
+.td-product .product-img {
+  display: inline-block;
+  margin: 0 22px;
+}
+.td-product b {
+  margin-left: 12px;
+}
+.td-product .autonomous {
+  margin-right: 22px;
+}
+.purchase-progress {
+  position: relative;
+}
+.purchase-progress i{
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  font-style:normal
+}
+.third-floor .inner-table {
+  padding: 0;
+}
