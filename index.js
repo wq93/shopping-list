@@ -49,12 +49,12 @@ var outerData = {
       ]
     }
   ],
-  page: {
+  pageInfo: {
     total:100,  //  总记录数
     pageCount:10,  // 页码数
     rowCount:10,    // 每页记录条数
     fromRecord: 1,
-    fromRecord: 20
+    toRecord: 20
   }
 }
 
@@ -177,40 +177,50 @@ var innerData = [
   }
 ];
 
-var currentSecondId = '';  // 点击第二层展开icon, 记录secondId
+var currentSecondId = '';  // 点击第二层展开icon, 记录secondI
+// 初始化渲染页面
+renderHtml(outerData);
 
-$('#pagination').pagination({
-  dataSource: function(done) {
-    $.ajax({
-      type: 'GET',
-      url: 'https://api.myjson.com/bins/xpdnt',
-      success: function(response) {
-        done(outerData.list);
-      }
-    });
-  },
-  pageNumber: 1, // 当前页码
-  pageSize: 1, // 每页显示
-  showGoInput: true,
-  showGoButton: true,
-  beforePaging: function(pagination){
-    console.log('page');
-    console.log(pagination); // 页码变化
-    // 请求新的数据
-  },
-  callback: function(data, pagination) {
-    var html = renderOuterHTML(outerData.list);
-    $('.shopping-list-table tbody').html(html);
-  }
-})
+// 分页配置方法
+function paginationConfig(pageInfo) {
+  $("#pagination").sPage({
+    page: $("#pagination").attr('data-current-pagenum') || 1, //当前页码，必填
+    total: pageInfo.total, //数据总条数，必填
+    pageSize: pageInfo.rowCount, //每页显示多少条数据，默认10条
+    showTotal:true, //是否显示总条数，默认关闭：false
+    totalTxt:"", //数据总条数文字描述，{total}为占位符，默认"共{total}条"
+    showSkip:true, //是否显示跳页，默认关闭：false
+    showPN:true, //是否显示上下翻页，默认开启：true
+    prevPage:"<<", //上翻页文字描述，默认“上一页”
+    nextPage:">>", //下翻页文字描述，默认“下一页”
+    backFun:function(page){
+      //点击分页按钮回调函数，返回当前页码
+      $("#pNum").text(page);
+      console.log(page); // 当前页码
+      // 记录当前页码
+      $("#pagination").attr('data-current-pagenum', page)
 
-// 遍历外层
+      // 点击页面变化后发送请求
+      // ....
+      // 变化页面数据
+    }
+  });
+}
+
+// 渲染表格和分页
+function renderHtml(outerData) {
+  var outerHTMl = renderOuterHTML(outerData.list);
+  $('.shopping-list-table tbody').html(outerHTMl);
+  $('.from-record').html(outerData.pageInfo.fromRecord);
+  $('.to-record').html(outerData.pageInfo.toRecord);
+  $('.total-record').html(outerData.pageInfo.total);
+  paginationConfig(outerData.pageInfo);
+}
+
+// 遍历生成html
 /*
 * 1. 请保证函数的调用顺序, 先生成完外层html再生成第三层html
 * */
-// 遍历外层html
-// renderOuterHTML();
-
 // 生成外层Html(第一层第二层)
 function renderOuterHTML(list) {
   var outerHTMl = ''; // 外层html(第一层第二层)
@@ -392,4 +402,15 @@ $('.shopping-list-table').on('change', '.checkbox-item', function (e) {
   }else {
     $('.checkbox-all')[0].checked = true;
   }
+})
+
+// 切换每页显示条数
+$('.pagination-info').on('change', '.page-num-select', function (e) {
+  // 每页显示条数
+  var pageSize = $(".pagination-num-select option:selected").val()
+  console.log(pageSize);
+  // 发请求
+  // ...
+  // 更新页面dom
+  renderHtml(outerData)
 })
