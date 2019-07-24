@@ -186,7 +186,7 @@ function paginationConfig(pageInfo) {
   $("#pagination").sPage({
     page: $("#pagination").attr('data-current-pagenum') || 1, //当前页码，必填
     total: pageInfo.total, //数据总条数，必填
-    pageSize: pageInfo.rowCount, //每页显示多少条数据，默认10条
+    pageSize: $(".page-num-select option:selected").val() || 10, //每页显示多少条数据，默认10条
     showTotal:true, //是否显示总条数，默认关闭：false
     totalTxt:"", //数据总条数文字描述，{total}为占位符，默认"共{total}条"
     showSkip:true, //是否显示跳页，默认关闭：false
