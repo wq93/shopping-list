@@ -407,7 +407,7 @@ $('.shopping-list-table').on('change', '.checkbox-item', function (e) {
 // 切换每页显示条数
 $('.pagination-info').on('change', '.page-num-select', function (e) {
   // 每页显示条数
-  var pageSize = $(".pagination-num-select option:selected").val()
+  var pageSize = $(".page-num-select option:selected").val()
   console.log(pageSize);
   // 发请求
   // ...
