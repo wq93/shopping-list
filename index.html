@@ -6,13 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Hello, Bootstrap Table!</title>
   <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./pagination.css">
   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <!--<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.css">-->
   <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!--<script src="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.js"></script>-->
+  <script src="./pagination.min.js"></script>
 </head>
 <body>
-<table class="table table-bordered shopping-list-table">
-  <thead class='table-header'>
+<div class="table-wrapper">
+  <table
+    class="table table-bordered shopping-list-table"
+    id='shopping-list-table'>
+    <thead class='table-header'>
     <tr>
       <th class='checkbox-th'><input type="checkbox" class='checkbox-all'></th>
       <th>产品信息</th>
@@ -24,10 +31,26 @@
       <th>库存</th>
       <th>仓库</th>
     </tr>
-  </thead>
-  <tbody >
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <div class="pagination-info">
+    <div class="pagination-detail">
+      显示第 <span class='from-record'>1</span> 到第 <span class='to-from-record'>10</span> 条记录，
+      总共 <span class='total-record'></span> 条记录每页显示
+      <select>
+        <option value ="10">10</option>
+        <option value ="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="200">200</option>
+      </select> 条记录
+    </div>
+    <div id="pagination"></div>
+  </div>
+</div>
+
 <script src=./index.js></script>
 </body>
 </html>

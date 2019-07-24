@@ -91,3 +91,9 @@ thead th {
 .third-floor .inner-table {
   padding: 0;
 }
+
+/* 分页 */
+.pagination-info {
+  display: flex;
+  justify-content: space-between;
+}

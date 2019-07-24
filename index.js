@@ -1,53 +1,62 @@
 // 1、第一层、第二层数据结构（默认显示一、二层，第一层要展开）
-var outerData = [
-  {
-    id: 1,
-    spu: "spu1",
-    state: "open",
-    children: [
-      {
-        pid: 1,
-        id: 11,
-        spu: "spu1",
-        colorId: 9,
-        colorName: "红色",
-        title: "2019春季新款民族宽松棉麻印...",
-        state: "cloesd"
-      }, {
-        pid: 1,
-        id: 12,
-        spu: "spu1",
-        colorId: 10,
-        colorName: "绿色",
-        title: "2019春季新款民族宽松棉麻印...",
-        state: "cloesd"
-      }
-    ]
-  },
-  {
-    id: 2,
-    spu: "spu2",
-    children: [
-      {
-        pid: 2,
-        id: 21,
-        spu: "spu2",
-        colorId: 9,
-        colorName: "红色",
-        title: "2019春季新款民族宽松棉麻印...",
-        state: "cloesd"
-      }, {
-        pid: 2,
-        id: 22,
-        spu: "spu2",
-        colorId: 10,
-        colorName: "绿色",
-        title: "2019春季新款民族宽松棉麻印...",
-        state: "cloesd"
-      }
-    ]
+var outerData = {
+  list : [
+    {
+      id: 1,
+      spu: "spu1",
+      state: "open",
+      children: [
+        {
+          pid: 1,
+          id: 11,
+          spu: "spu1",
+          colorId: 9,
+          colorName: "红色",
+          title: "2019春季新款民族宽松棉麻印...",
+          state: "cloesd"
+        }, {
+          pid: 1,
+          id: 12,
+          spu: "spu1",
+          colorId: 10,
+          colorName: "绿色",
+          title: "2019春季新款民族宽松棉麻印...",
+          state: "cloesd"
+        }
+      ]
+    },
+    {
+      id: 2,
+      spu: "spu2",
+      children: [
+        {
+          pid: 2,
+          id: 21,
+          spu: "spu2",
+          colorId: 9,
+          colorName: "红色",
+          title: "2019春季新款民族宽松棉麻印...",
+          state: "cloesd"
+        }, {
+          pid: 2,
+          id: 22,
+          spu: "spu2",
+          colorId: 10,
+          colorName: "绿色",
+          title: "2019春季新款民族宽松棉麻印...",
+          state: "cloesd"
+        }
+      ]
+    }
+  ],
+  page: {
+    total:100,  //  总记录数
+    pageCount:10,  // 页码数
+    rowCount:10,    // 每页记录条数
+    fromRecord: 1,
+    fromRecord: 20
   }
-];
+}
 
 // 2、第三层数据结构（异步加载，点击展开第二层时加载）数组
 var innerData = [
@@ -168,19 +177,45 @@ var innerData = [
   }
 ];
 
-var outerHTMl = ''; // 外层html(第一层第二层)
 var currentSecondId = '';  // 点击第二层展开icon, 记录secondId
-// 遍历外层
 
+$('#pagination').pagination({
+  dataSource: function(done) {
+    $.ajax({
+      type: 'GET',
+      url: 'https://api.myjson.com/bins/xpdnt',
+      success: function(response) {
+        done(outerData.list);
+      }
+    });
+  },
+  pageNumber: 1, // 当前页码
+  pageSize: 1, // 每页显示
+  showGoInput: true,
+  showGoButton: true,
+  beforePaging: function(pagination){
+    console.log('page');
+    console.log(pagination); // 页码变化
+    // 请求新的数据
+  },
+  callback: function(data, pagination) {
+    var html = renderOuterHTML(outerData.list);
+    $('.shopping-list-table tbody').html(html);
+  }
+})
+
+// 遍历外层
 /*
 * 1. 请保证函数的调用顺序, 先生成完外层html再生成第三层html
 * */
 // 遍历外层html
-renderOuterHTML();
+// renderOuterHTML();
 
 // 生成外层Html(第一层第二层)
-function renderOuterHTML() {
-  outerData.forEach(function (item) {
+function renderOuterHTML(list) {
+  var outerHTMl = ''; // 外层html(第一层第二层)
+
+  list.forEach(function (item) {
     var children = item.children;
     outerHTMl +=
       `<tr class='first-floor' data-first-id=${item.id}>
@@ -200,7 +235,8 @@ function renderOuterHTML() {
     });
   });
 
-  $('.shopping-list-table tbody').html(outerHTMl);
+  return outerHTMl
+  // $('.shopping-list-table tbody').html(outerHTMl);
 }
 
 // 生成第三层Html, 传入实参 secondId
@@ -356,5 +392,4 @@ $('.shopping-list-table').on('change', '.checkbox-item', function (e) {
   }else {
     $('.checkbox-all')[0].checked = true;
   }
-  
 })
