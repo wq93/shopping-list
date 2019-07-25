@@ -13,42 +13,40 @@
   <script src="jquery.pagination.js"></script>
 </head>
 <body>
-<div class="table-wrapper">
+<div class='table-wrapper'>
   <table
-    class="table table-bordered shopping-list-table"
-    id='shopping-list-table'>
+    class="table table-bordered shopping-list-table">
     <thead class='table-header'>
-    <tr>
-      <th class='checkbox-th'><input type="checkbox" class='checkbox-all'></th>
-      <th>产品信息</th>
-      <th>操作</th>
-      <th>采购建议/需求</th>
-      <th>销量【 昨天/3天 】</th>
-      <th>供应商信息</th>
-      <th>采购进度</th>
-      <th>库存</th>
-      <th>仓库</th>
-    </tr>
+      <tr>
+        <th class='checkbox-th'><input type="checkbox" class='checkbox-all'></th>
+        <th>产品信息</th>
+        <th>操作</th>
+        <th>采购建议/需求</th>
+        <th>销量【 昨天/3天 】</th>
+        <th>供应商信息</th>
+        <th>采购进度</th>
+        <th>库存</th>
+        <th>仓库</th>
+      </tr>
     </thead>
     <tbody>
     </tbody>
   </table>
-  <div class="pagination-info">
-    <div class="pagination-detail">
-      显示第 <span class='from-record'>1</span> 到第 <span class='to-record'>10</span> 条记录，
-      总共 <span class='total-record'>1</span> 条记录每页显示
-      <select class='page-num-select'>
-        <option value ="10">10</option>
-        <option value ="25">25</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-        <option value="200">200</option>
-      </select> 条记录
-    </div>
-    <div id="pagination" data-current-pagenum='1'></div>
-  </div>
 </div>
-
+<div class="pagination-info">
+  <div class="pagination-detail">
+    显示第 <span class='from-record'>1</span> 到第 <span class='to-record'>10</span> 条记录，
+    总共 <span class='total-record'>1</span> 条记录每页显示
+    <select class='page-num-select'>
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+      <option value="200">200</option>
+    </select> 条记录
+  </div>
+  <div id="pagination" data-current-pagenum='1'></div>
+</div>
 <script src=./index.js></script>
 </body>
 </html>
